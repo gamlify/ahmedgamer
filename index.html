@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Navbar</title>
+    <link href="https://unpkg.com/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script> <!-- Adding Typed.js -->
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Poppins, sans-serif;
+            background-color: #ffffff;
+            color: #784cfb;
+        }
+
+        /* Logo Styles */
+        .logo-img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height: 80px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #784cfb;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ab47bc;
+        }
+
+        /* Resume Button */
+        .resume-btn button {
+            background-color: #784cfb;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .resume-btn button:hover {
+            background-color: #ab47bc;
+        }
+
+        /* Social Media Links */
+        .social-links a {
+            color: #784cfb;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ab47bc;
+        }
+
+        /* Download Button Styles */
+        .download-btn {
+            margin-left: 20px;
+        }
+
+        .download-btn .cta-btn {
+            background-color: #784cfb;
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn .cta-btn:hover {
+            background-color: #ab47bc;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            color: #784cfb;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 5%;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                right: 5%;
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .resume-btn,
+            .social-links {
+                display: none;
+            }
+
+            .download-btn {
+                margin-left: 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            color: white;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero-text {
+            max-width: 45%;
+            text-align: left;
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #784cfb, 0 0 20px #784cfb, 0 0 30px #784cfb, 0 0 40px #784cfb, 0 0 50px #784cfb;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #784cfb;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            background-color: #784cfb;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 400px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #784cfb;
+            transform: scale(1.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        /* Image Section */
+        .hero-image {
+            max-width: 45%;
+            height: auto;
+            position: absolute;
+            right: 5%;
+            top: 15%;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column;
+                padding: 20px 5%;
+                height: auto;
+            }
+
+            .hero-text {
+                max-width: 100%;
+                text-align: center;
+                margin-top: 80px;
+            }
+
+            .hero-image {
+                position: static;
+                max-width: 100%;
+                margin-top: 20px;
+            }
+        }
+
+        /* Skills Section */
+        #skills {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 5%;
+            background-color: #f4f4f4;
+            text-align: center;
+            height: auto;
+        }
+
+        .skills-category h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #784cfb;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 100%;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            width: 250px;
+            height: 250px;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #784cfb;
+        }
+
+        .skill-info p {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #784cfb;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            height: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background-color: #784cfb;
+            height: 100%;
+        }
+
+        .percentage {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #784cfb;
+        }
+
+        @media (max-width: 768px) {
+            #skills {
+                padding: 30px 5%;
+            }
+
+            .skills-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: #f4f4f4;
+            padding: 50px 5%;
+            text-align: center;
+        }
+
+        .testimonials-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            overflow: hidden;
+        }
+
+        .testimonial-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .client-icon {
+            font-size: 60px;
+            color: #784cfb;
+            margin-bottom: 20px;
+        }
+
+        .client-info {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .client-position {
+            color: #888;
+        }
+
+        .testimonial-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .star-rating .star {
+            font-size: 20px;
+            color: #ffb800;
+        }
+
+        .carousel-nav {
+            margin-top: 30px;
+        }
+
+        .carousel-nav button {
+            background-color: #784cfb;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-nav button:hover {
+            background-color: #ab47bc;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .testimonial-card {
+                width: 80%;
+            }
+        }
+
+        /* Contact Section */
+        .contact-us-section {
+            background: linear-gradient(135deg, #784cfb, #5b2d91);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .contact-us-section .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-us-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .contact-us-section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #fff;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 8px #784cfb;
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: #bbb;
+        }
+
+        .submit-btn {
+            background: #784cfb;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #5b2d91;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .contact-us-section {
+                padding: 40px 5%;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #111;
+            color: white;
+            padding: 50px 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-left,
+        .footer-links,
+        .footer-right,
+        .footer-subscribe {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+
+        .footer-left h3,
+        .footer-links h3,
+        .footer-right h3,
+        .footer-subscribe h3 {
+            font-size: 1.5rem;
+            color: #784cfb;
+            margin-bottom: 15px;
+        }
+
+        .footer-left p,
+        .footer-subscribe p {
+            color: #ccc;
+        }
+
+        .footer-links ul,
+        .footer-right ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links a,
+        .footer-right a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .footer-links a:hover,
+        .footer-right a:hover {
+            color: #784cfb;
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom .social-links {
+            margin-top: 15px;
+        }
+
+        .footer-bottom .social-links a {
+            text-decoration: none;
+            color: #784cfb;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom .social-links a:hover {
+            color: white;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #784cfb;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #5b2d91;
+        }
+
+        .footer-subscribe form input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 10px;
+        }
+
+        .footer-subscribe form button {
+            padding: 10px 20px;
+            background-color: #784cfb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer-subscribe form button:hover {
+            background-color: #5b2d91;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-left,
+            .footer-links,
+            .footer-right,
+            .footer-subscribe {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#"><img src="logo2.svg" alt="Logo" class="logo-img"></a>
+        </div>
+    
+        <ul class="nav-links">
+            <li><a href="#home"><i class="bx bx-home"></i> Home</a></li>
+            <li><a href="#about"><i class="bx bx-user"></i> About</a></li>
+            <li><a href="#skills"><i class="bx bx-rocket"></i> Skills</a></li>
+            <li><a href="#projects"><i class="bx bx-code"></i> Projects</a></li>
+            <li><a href="#contact"><i class="bx bx-phone"></i> Contact</a></li>
+        </ul>
+    
+        <!-- Download Button -->
+        <div class="download-btn">
+            <a href="portfolio.pdf" download="Ahmed_Raza_Portfolio" class="download-link">
+                <button class="cta-btn"><i class="bx bx-download"></i> Download Portfolio</button>
+            </a>
+        </div>
+    
+        <div class="social-links">
+            <a href="https://github.com" target="_blank"><i class="bx bxl-github"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="bx bxl-linkedin"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <i class="bx bx-menu"></i>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Hello, It's me <br>AHMED RAZA <br> & I'm <span id="typed"></span></h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam dolore doloribus magni, dolorem quae
+                asperiores tenetur non doloremque sapiente, magnam tempora velit reiciendis veritatis et. Vero dolores
+                sapiente amet ipsa.</p>
+            <button class="cta-btn"><i class="bx bx-envelope"></i> Contact Me</button>
+        </div>
+        <img src="person.png" alt="Your Image" class="hero-image">
+    </div>
+    
+    <!-- Backend Development Section -->
+    <section id="backend">
+        <div class="skills-category">
+            <h2><i class="bx bx-server"></i> Backend Development</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bxl-nodejs"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>Node.js</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%;"></div>
+                        </div>
+                        <span class="percentage">85%</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bxl-python"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>Python</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <span class="percentage">75%</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bxl-django"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>Django</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%;"></div>
+                        </div>
+                        <span class="percentage">70%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Databases Section -->
+    <section id="databases">
+        <div class="skills-category">
+            <h2><i class="bx bx-database"></i> Databases</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bx-database"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>MySQL</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 80%;"></div>
+                        </div>
+                        <span class="percentage">80%</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bx-database"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>MongoDB</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <span class="percentage">75%</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bx-database"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>PostgreSQL</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%;"></div>
+                        </div>
+                        <span class="percentage">65%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tools & Technologies Section -->
+    <section id="tools">
+        <div class="skills-category">
+            <h2><i class="bx bx-cogs"></i> Tools & Technologies</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bxl-git"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>Git</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                        <span class="percentage">90%</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bxl-docker"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>Docker</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 80%;"></div>
+                        </div>
+                        <span class="percentage">80%</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="bx bxl-webpack"></i>
+                    </div>
+                    <div class="skill-info">
+                        <p>Webpack</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%;"></div>
+                        </div>
+                        <span class="percentage">70%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <h2><i class="bx bx-comment"></i> What Clients Say</h2>
+        <div class="testimonials-container">
+            <!-- Testimonial Card 1 -->
+            <div class="testimonial-card">
+                <div class="client-icon"><i class="bx bx-briefcase"></i></div>
+                <div class="testimonial-quote">
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore magna aliqua."
+                </div>
+                <div class="client-info">
+                    John Doe
+                    <div class="client-position">CEO, Example Corp</div>
+                </div>
+                <div class="star-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+    
+            <!-- Testimonial Card 2 -->
+            <div class="testimonial-card">
+                <div class="client-icon"><i class="bx bx-line-chart"></i></div>
+                <div class="testimonial-quote">
+                    "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Quisque
+                    sit amet sapien."
+                </div>
+                <div class="client-info">
+                    Jane Smith
+                    <div class="client-position">Marketing Director, XYZ Ltd</div>
+                </div>
+                <div class="star-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+    
+            <!-- Testimonial Card 3 -->
+            <div class="testimonial-card">
+                <div class="client-icon"><i class="bx bx-laptop"></i></div>
+                <div class="testimonial-quote">
+                    "Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod
+                    semper."
+                </div>
+                <div class="client-info">
+                    Sarah Lee
+                    <div class="client-position">Product Manager, ABC Co.</div>
+                </div>
+                <div class="star-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Carousel Navigation -->
+        <div class="carousel-nav">
+            <button id="prev" onclick="prevTestimonial()">Previous</button>
+            <button id="next" onclick="nextTestimonial()">Next</button>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact-us" class="contact-us-section">
+        <div class="container">
+            <h2><i class="bx bx-envelope"></i> Contact Us</h2>
+            <p>We'd love to hear from you. Feel free to reach out with any questions!</p>
+            <form class="contact-form" action="#" method="POST">
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required />
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required />
+                </div>
+                <div class="input-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="Subject" required />
+                </div>
+                <div class="input-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn"><i class="bx bx-send"></i> Submit</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>About</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor officia quo officia quia?</p>
+            </div>
+    
+            <div class="footer-links">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#"><i class="bx bx-link"></i> Services</a></li>
+                    <li><a href="#"><i class="bx bx-link"></i> Portfolio</a></li>
+                    <li><a href="#"><i class="bx bx-link"></i> About</a></li>
+                    <li><a href="#"><i class="bx bx-link"></i> Testimonials</a></li>
+                    <li><a href="#"><i class="bx bx-link"></i> Contact</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-right">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#"><i class="bx bx-cogs"></i> Web Design</a></li>
+                    <li><a href="#"><i class="bx bx-cogs"></i> Web Dev</a></li>
+                    <li><a href="#"><i class="bx bx-cogs"></i> App Design</a></li>
+                    <li><a href="#"><i class="bx bx-cogs"></i> Marketing</a></li>
+                    <li><a href="#"><i class="bx bx-cogs"></i> UI Design</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-subscribe">
+                <h3>Subscribe</h3>
+                <p>Lorem ipsum dolor, sit amet ipsum dolor sit amet.</p>
+                <form>
+                    <input type="email" placeholder="Email">
+                    <button type="submit"><i class="bx bx-paper-plane"></i> Subscribe</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2020 All rights reserved | Made by True Coder</p>
+            <div class="social-links">
+                <a href="#"><i class="bx bxl-facebook"></i></a>
+                <a href="#"><i class="bx bxl-twitter"></i></a>
+                <a href="#"><i class="bx bxl-instagram"></i></a>
+                <a href="#"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+    
+        <button class="scroll-to-top"><i class="bx bx-arrow-to-top"></i></button>
+    </footer>
+
+    <script>
+        // Initialize Typed.js for the main heading
+        var typed = new Typed('#typed', {
+            strings: ["Frontend Developer", "Software Engineer", "Data Scientist", "Product Manager"],
+            typeSpeed: 100,
+            backSpeed: 100,
+            backDelay: 100,
+            loop: true,
+            cursorChar: "|",
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById("theme-btn");
+        const body = document.body;
+
+        themeBtn.addEventListener("click", () => {
+            body.classList.toggle("light-theme");
+            if (body.classList.contains("light-theme")) {
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // Testimonial Carousel
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const totalTestimonials = testimonials.length;
+
+        function hideTestimonials() {
+            testimonials.forEach((testimonial) => {
+                testimonial.style.display = 'none';
+            });
+        }
+
+        function showTestimonial(index) {
+            testimonials[index].style.display = 'block';
+        }
+
+        showTestimonial(currentTestimonial);
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            hideTestimonials();
+            showTestimonial(currentTestimonial);
+        }
+
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            hideTestimonials();
+            showTestimonial(currentTestimonial);
+        }
+
+        setInterval(nextTestimonial, 5000);
+
+        // Submit form and show success animation
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('submit-btn').innerHTML = 'Submitting...';
+            setTimeout(() => {
+                document.getElementById('submit-btn').innerHTML = 'Success! 🎉';
+                setTimeout(() => {
+                    document.getElementById('submit-btn').innerHTML = 'Submit';
+                    alert("Thank you for reaching out!");
+                }, 1000);
+            }, 1500);
+        });
+
+        // Copy email to clipboard
+        document.getElementById('email-link').addEventListener('click', function () {
+            navigator.clipboard.writeText(this.textContent).then(() => {
+                alert('Copied to clipboard! ✅');
+            });
+        });
+
+        // Floating Labels Effect (For inputs)
+        const inputs = document.querySelectorAll('.input-field input, .input-field textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentNode.classList.add('focused');
+            });
+            input.addEventListener('blur', function () {
+                if (!this.value) {
+                    this.parentNode.classList.remove('focused');
+                }
+            });
+        });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
